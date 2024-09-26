@@ -6,29 +6,31 @@ import networkSecurity1.encryption.DES;
 import networkSecurity1.encryption.TripleDES;
 
 public class encryptionTest {
-    public static void main(String[] args) throws Exception {
-        String text10Byte = Util.readFile("./src/networkSecurity1/text1.txt");
-        String text100Byte = Util.readFile("./src/networkSecurity1/text2.txt");
-        String text1kByte = Util.readFile("./src/networkSecurity1/text3.txt");
+    static String text10Byte = Util.readFile("./src/networkSecurity1/text1.txt");
+    static String text100Byte = Util.readFile("./src/networkSecurity1/text2.txt");
+    static String text1kByte = Util.readFile("./src/networkSecurity1/text3.txt");
 
+    public static void main(String[] args) throws Exception {
         /** AES + CBC **/
         System.out.println("AES + CBC");
-        encryptAndDecrypt(text10Byte, new AES());
-        encryptAndDecrypt(text100Byte, new AES());
-        encryptAndDecrypt(text1kByte, new AES());
-
+        displayResult(new AES());
 
         /** DES + ECB **/
-        System.out.println("\n\nDES + ECB");
-        encryptAndDecrypt(text10Byte, new DES());
-        encryptAndDecrypt(text100Byte, new DES());
-        encryptAndDecrypt(text1kByte, new DES());
+        System.out.println("DES + ECB");
+        displayResult(new DES());
 
         /** 3DES + ECB **/
-        System.out.println("\n\n3DES + ECB");
-        encryptAndDecrypt(text10Byte, new TripleDES());
-        encryptAndDecrypt(text100Byte, new TripleDES());
-        encryptAndDecrypt(text1kByte, new TripleDES());
+        System.out.println("3AES + ECB");
+        displayResult(new TripleDES());
+    }
+    static void displayResult(Crypto algorithm) {
+        System.out.println("10Byte");
+        encryptAndDecrypt(text10Byte, algorithm);
+        System.out.println("100Byte");
+        encryptAndDecrypt(text100Byte, algorithm);
+        System.out.println("1kByte");
+        encryptAndDecrypt(text1kByte, algorithm);
+        System.out.println();
     }
 
     static void encryptAndDecrypt(String plainText, Crypto crypto) {

@@ -19,7 +19,7 @@ public class AES implements Crypto{
     }
 
     public AES(SecretKey secretKey) throws Exception{
-        cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
         this.secretKey = secretKey;
         ivSpec = new IvParameterSpec(new byte[16]);
     }
